@@ -1,14 +1,20 @@
 [
   {
-    "name": "Amarica 24",
-    "id": "QGpHLgRnrx4",
-    "logo": "https://i.ytimg.com/vi/QGpHLgRnrx4/hqdefault.jpg"
+    "name": "TV Pública",
+    "id": "Hx_oNrpmMWA",  
+    "logo": "https://i.ytimg.com/vi/Hx_oNrpmMWA/hqdefault.jpg"
   },
   {
     "name": "América TV",
     "id": "lbuU0a2y5OI",  
     "logo": "https://i.ytimg.com/vi/lbuU0a2y5OI/hqdefault.jpg"
   },
+  {
+    "name": "Amarica 24",
+    "id": "QGpHLgRnrx4",
+    "logo": "https://i.ytimg.com/vi/QGpHLgRnrx4/hqdefault.jpg"
+  },
+ 
   {
     "name": "C5N",
     "id": "jEk25C92JIQ",
@@ -33,6 +39,21 @@
     "name": "Crónica",
     "id": "avly0uwZzOE",
     "logo": "https://i.ytimg.com/vi/avly0uwZzOE/hqdefault.jpg"
+  },
+  {
+    "name": "Canal 26",
+    "id": "MS0QdZ5zvn8",
+    "logo": "https://i.ytimg.com/vi/MS0QdZ5zvn8/hqdefault.jpg"
+  },
+  {
+    "name": "Nat Geo WILD",
+    "id": "BJ3Yv572V1A",
+    "logo": "https://i.ytimg.com/vi/BJ3Yv572V1A/hqdefault.jpg"
+  },
+  {
+    "name": "NASA Live",
+    "id": "QviXe8xvA50",
+    "logo": "https://i.ytimg.com/vi/QviXe8xvA50/hqdefault.jpg"
   },
   {
     "name": "Radio La Red",
