@@ -8,9 +8,18 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="stylesheet" href="node_modules/lite-youtube-embed/src/lite-yt-embed.css" />
 		<title>Astro</title>
 	</head>
 	<body>
 		<h1>Astro</h1>
+		
+		<lite-youtube videoid="ogfYd705cRs" style="background-image: url('https://i.ytimg.com/vi/ogfYd705cRs/hqdefault.jpg');">
+			<a href="https://youtube.com/watch?v=ogfYd705cRs" class="lty-playbtn" title="Play Video">
+			  <span class="lyt-visually-hidden">Play Video: Keynote (Google I/O '18)</span>
+			</a>
+		  </lite-youtube>
+		
+		<script src="node_modules/lite-youtube-embed/src/lite-yt-embed.js" is:inline></script>
 	</body>
 </html>
