@@ -8,15 +8,45 @@
   }
 :root {
     --bg-page:#111;
-    --channel-thumb-width: 80px;
+    --channel-thumb-width: 65px;
     --navbar-width:calc(var(--channel-thumb-width) + 20px);
     --navbar-width-open: 250px;
+    --scrollbar-color:#021227;
 }
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: var(--scrollbar-color);
+  }
+  
+  *::-webkit-scrollbar-track:hover {
+    background-color:color-mix(in srgb, var(--scrollbar-color) 100%, #fff 2%);
+  }
+  
+  *::-webkit-scrollbar-track:active {
+    background-color: color-mix(in srgb, var(--scrollbar-color) 100%, #fff 2%);
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color:color-mix(in srgb, var(--scrollbar-color) 100%, #fff 10%);
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background-color:color-mix(in srgb, var(--scrollbar-color) 100%, #fff 12%);
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+    background-color:color-mix(in srgb, var(--scrollbar-color) 100%, #fff 12%);
+  }
 body {
     background-color: var(--bg-page);
     color: white;
@@ -29,6 +59,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     overflow: hidden;
+    
 }
 ul {
     list-style-type: none;
@@ -55,10 +86,12 @@ main {
         width: var(--navbar-width);
         height: 100dvh;
         overflow: clip;
-        overflow-y: auto;
+        
+        scrollbar-gutter:stable;
+        scrollbar-width:10px;
         transition: width 0.5s ease-in-out;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
         /* &:after {
             content:"";
@@ -73,7 +106,7 @@ main {
         &:hover {
             width: var(--navbar-width-open);
             box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5);
-            
+            overflow-y: auto;
         }
         .menu-channels {
             padding: 0;
