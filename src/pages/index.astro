@@ -36,12 +36,18 @@ import BoxChannel from "../components/BoxChannel.astro";
       const menuChannelsList = document.querySelectorAll(".menu-channels a");
       const containerChannel = document.querySelector(".container-channel");
 
-	//   console.log(menuChannelsList)
-	  
-      player();
+	//   liteYoutube.addEventListener("onReady", (event) => {
+		
+	//   })	  
+     
+	  player();
       menuChannelsList.forEach((link) =>
         link.addEventListener("click", (event) => {
           const youtubeId = link.getAttribute("data-youtube");
+		
+		  // Remove/Add active class
+		  menuChannelsList.forEach((link) => link.parentElement.classList.remove("is-active"));
+		  link.parentElement.classList.add("is-active");
           loadVideo(youtubeId);
         })
       );

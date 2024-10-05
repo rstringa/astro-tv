@@ -8,12 +8,14 @@
   }
 :root {
     --bg-page:#111;
-    --navbar-width: 80px;
+    --channel-thumb-width: 80px;
+    --navbar-width:calc(var(--channel-thumb-width) + 20px);
     --navbar-width-open: 250px;
 }
 *, *::before, *::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     background-color: var(--bg-page);
@@ -41,10 +43,11 @@ main {
     gap:32px;
     width: 100%;
     height: 100dvh;
-    
+   
     .navbar {
-        --bg-color : #141414;
+        --bg-color : #021227;
         background-color: var(--bg-color);
+        background: radial-gradient(ellipse 300px 25vh at 50% 0%, #09203f 0%,var(--bg-color) 100%);
         position: fixed;
         z-index: 2;
         top: 0;
@@ -56,31 +59,52 @@ main {
         transition: width 0.5s ease-in-out;
         display: flex;
         align-items: center;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); 
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        /* &:after {
+            content:"";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: var(--bg-color) url(bg.webp) no-repeat center right;
+            z-index: 0;
+        }  */
         &:hover {
             width: var(--navbar-width-open);
             box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5);
+            
         }
         .menu-channels {
             padding: 0;
             width: 100%;
+            position: relative;
+            z-index: 1;
             li {
             margin-bottom: 4px;
             padding: 8px;
+            &.is-active {
+                background-color: color-mix(in srgb, var(--bg-color) 100%, #a19f9f 10%);
+            }
             &:hover {
-                background-color: color-mix(in srgb, var(--bg-color) 100%, #fff 5%);
+                background-color: color-mix(in srgb, var(--bg-color) 100%, #dbdbdb 5%);
+                & a img {
+                    opacity: 1;
+                }
             }
                 a {
                     display: grid;
-
-                    grid-template-columns: 60px 1fr;
+                    grid-template-columns: var(--channel-thumb-width) 1fr;
                     align-items: center;
                     white-space: nowrap;
-                    color:aliceblue;
+                    color:rgb(215, 237, 254);
                     text-decoration: none;
                     gap:16px;
                         img {
                             max-width: 100%;
+                            border-radius: 4px;
+                            opacity: 0.85;
+                            
                         }
                 }
             }
@@ -89,10 +113,10 @@ main {
     
     .container-channel {
         display: flex;
-        justify-content:  flex-end;
-        align-items: flex-end;
+        justify-content: flex-end;
+        align-items: center;
         width: calc(100vw - var(--navbar-width));
-        margin-left: var(--navbar-width);
+        margin-left: calc(var(--navbar-width));
         height:100dvh;
         .lite-youtube {
             width: 100%;
@@ -100,4 +124,32 @@ main {
         }
     }
 
+}
+
+@media (max-width: 768px) {
+        main {
+            --navbar-width: 100dvw;
+            --navbar-width-open: 100dvw;
+            --navbar-height: 245px;
+            grid-template-columns: 1fr;
+            grid-template-rows:auto 1fr;
+            .navbar {
+                height: var(--navbar-height);
+                width: 100dvw;
+                
+        }
+        .menu-channels {
+            height: 100%;
+        }
+        .container-channel{
+            margin-left: 0;
+            margin-top: var(--navbar-height);
+            height: calc(100dvh -  var(--navbar-height) );
+            width: 100vw;
+            padding: 8px;
+            display: flex;
+            place-content: center;
+            align-items: flex-start;
+        }
+    }
 }
