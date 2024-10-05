@@ -13,13 +13,59 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
-
-		<lite-youtube videoid="ogfYd705cRs" style="background-image: url('https://i.ytimg.com/vi/ogfYd705cRs/hqdefault.jpg');">
-			<a href="https://youtube.com/watch?v=ogfYd705cRs" class="lty-playbtn" title="Play Video">
-			  <span class="lyt-visually-hidden">Play Video: Keynote (Google I/O '18)</span>
-			</a>
-		  </lite-youtube>
-		
+		<nav class="menu-channels">
+			<ul>
+				<li><a href="#" data-youtube="QGpHLgRnrx4">Amarica 24</a></li>
+				<li><a href="#" data-youtube="NdQSOItOQ5Y">C5N</a></li>
+				<li><a href="#" data-youtube="cb12KmMMDJA">TN</a></li>
+			</ul>
+		</nav>
+		<div class="box-channel">
+			<lite-youtube class="lite-youtube" videoid="QGpHLgRnrx4" 
+			params="rel=0&enablejsapi=1&autoplay=1"
+			style="background-image: url('https://i.ytimg.com/vi/QGpHLgRnrx4/hqdefault.jpg');">
+				<a href="https://youtube.com/watch?v=QGpHLgRnrx4" class="lty-playbtn" title="Ver Canal Online">
+					<span class="lyt-visually-hidden">Ver Canal Online</span>
+				</a>
+			</lite-youtube>
+		</div>
 		<script src="https://paulirish.github.io/lite-youtube-embed/src/lite-yt-embed.js" is:inline></script>
+	
+		  
+		<script is:inline>
+			
+			const liteYoutube = document.querySelector('.lite-youtube');
+			const menuChannelsList = document.querySelectorAll('.menu-channels a');
+			const boxChannel = document.querySelector('.box-channel');	
+			
+		player()
+		menuChannelsList.forEach((link) => link.addEventListener('click', (event) => {
+				const youtubeId = event.target.getAttribute('data-youtube');
+				loadVideo(youtubeId);
+		}))	
+
+		function loadVideo(youtubeId) {
+			boxChannel.innerHTML =`
+			<lite-youtube class="lite-youtube" videoid="${youtubeId}" 
+			params="rel=0&enablejsapi=1&autoplay=1"
+			style="background-image: url('https://i.ytimg.com/vi/'${youtubeId}'/hqdefault.jpg\');">
+				<a href="https://youtube.com/watch?v=${youtubeId}" class="lty-playbtn" title="Ver Canal Online">
+					<span class="lyt-visually-hidden">Ver Canal Online</span>
+				</a>
+			</lite-youtube>	
+			`
+			player()
+				}
+
+		function player(){
+			const player = document.querySelector('lite-youtube');
+			setTimeout(() => {
+			  player.getYTPlayer().then((p) => {
+				console.log(p);
+			  });
+			}, 1000); // Agrega un retraso de 1 segundo
+		}		
+		</script>  
+	
 	</body>
 </html>
