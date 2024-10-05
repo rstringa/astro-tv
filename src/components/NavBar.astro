@@ -1,0 +1,14 @@
+---
+import youtubeChannels from "../data/channels.json";
+---
+
+<nav class="menu-channels">
+    <ul>
+        {youtubeChannels.map((channel) => (
+            <li><a href="#" data-youtube={channel.id}>
+            <img src={channel.logo} alt={channel.name} />
+            {channel.name}</a>
+            </li>
+        ))}
+    </ul>
+</nav>
