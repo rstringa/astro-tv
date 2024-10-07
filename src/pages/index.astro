@@ -19,12 +19,12 @@ import BoxChannel from "../components/BoxChannel.astro";
   </head>
   <body>
     <main>
-		<div class="navbar">	
-			<NavBar />
-		</div>
-		<div class="container-channel">
-			<BoxChannel />
-		</div> 
+      <div class="navbar">
+        <NavBar />
+      </div>
+      <div class="container-channel">
+        <BoxChannel />
+      </div>
     </main>
 
     <script
@@ -36,24 +36,43 @@ import BoxChannel from "../components/BoxChannel.astro";
       const menuChannelsList = document.querySelectorAll(".menu-channels a");
       const containerChannel = document.querySelector(".container-channel");
 
-	//   liteYoutube.addEventListener("onReady", (event) => {
-		
-	//   })	  
-     
-	  player();
+      //   liteYoutube.addEventListener("onReady", (event) => {
+
+      //   })
+
+        player();
+      //checkVideoOnline();
       menuChannelsList.forEach((link) =>
         link.addEventListener("click", (event) => {
           const youtubeId = link.getAttribute("data-youtube");
-		
-		  // Remove/Add active class
-		  menuChannelsList.forEach((link) => link.parentElement.classList.remove("is-active"));
-		  link.parentElement.classList.add("is-active");
-          loadVideo(youtubeId);
+          const titleText = link.textContent;
+
+          // Hack or non start view transition
+          if (!document.startViewTransition) {
+            menuChannelsList.forEach((link) =>
+              link.parentElement.classList.remove("is-active")
+            );
+            link.parentElement.classList.add("is-active");
+            loadVideo(youtubeId, titleText);
+          }
+
+          // Start view transition
+          document.startViewTransition(() => {
+            menuChannelsList.forEach((link) =>
+              link.parentElement.classList.remove("is-active")
+            );
+            link.parentElement.classList.add("is-active");
+            loadVideo(youtubeId, titleText);
+			//checkVideoOnline(youtubeId, link.parentElement);
+          });
         })
       );
 
-      function loadVideo(youtubeId) {
+      function loadVideo(youtubeId, titleText) {
         containerChannel.innerHTML = `
+			<div class="top-bar">
+				<h1>${titleText}</h1>
+			</div>
 			<lite-youtube class="lite-youtube" videoid="${youtubeId}" 
 			params="controls=1&rel=0&enablejsapi=1&autoplay=1"
 			style="background-image: url('https://i.ytimg.com/vi/'${youtubeId}'/hqdefault.jpg\');">
@@ -62,17 +81,20 @@ import BoxChannel from "../components/BoxChannel.astro";
 				</a>
 			</lite-youtube>	
 			`;
-        player();
+         player();
+      
       }
 
-      function player() {
-        const player = document.querySelector("lite-youtube");
-        setTimeout(() => {
-          player.getYTPlayer().then((p) => {
-            console.log(p);
-          });
-        }, 1000); // Agrega un retraso de 1 segundo
-      }
+   
+
+        function player() {
+          const player = document.querySelector("lite-youtube");
+          setTimeout(() => {
+            player.getYTPlayer().then((p) => {
+              console.log(p);
+            });
+          }, 1000); // Agrega un retraso de 1 segundo
+        }
     </script>
   </body>
 </html>

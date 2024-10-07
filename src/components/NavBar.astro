@@ -1,15 +1,57 @@
 ---
 import youtubeChannels from "../data/channels.json";
+// const youtubeApi = import.meta.env.PUBLIC_YOUTUBE_API;
 ---
 
 <nav class="menu-channels">
-    <h1>Canales YouTube</h1>
-    <ul>
-        {youtubeChannels.map((channel) => (
-            <li><a href="#" data-youtube={channel.id}>
+  <ul>
+    {
+      youtubeChannels.map((channel) => (
+        <li>
+          <a href="#" data-youtube={channel.id}>
             <img src={channel.logo} alt={channel.name} />
-            {channel.name}</a>
-            </li>
-        ))}
-    </ul>
+            {channel.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </nav>
+
+<script is:inline>
+  // Agrega is-live a cada elemento del menu si emite en vivo
+  // utiliza video.actualStartTime && !video.actualEndTime de la api
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuChannelsListNav = document.querySelectorAll(".menu-channels a");
+
+    menuChannelsListNav.forEach((menuItem) => {
+      const youtubeId = menuItem.getAttribute("data-youtube");
+      checkVideoOnline(youtubeId, menuItem);
+    });
+
+    function checkVideoOnline(youtubeId = "", menuVideoItem) {
+      const apiKey = "AIzaSyBEDCTE_Z2YsfWOCpZFwt8Ppbx3Leri4Wg";
+      const url = `https://www.googleapis.com/youtube/v3/videos?id=${youtubeId}&part=liveStreamingDetails&key=${apiKey}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.items && data.items.length > 0) {
+            const video = data.items[0].liveStreamingDetails;
+
+            if (video.actualStartTime && !video.actualEndTime) {
+              console.log("El video está en vivo");
+              menuVideoItem.classList.add("is-live");
+            } else {
+              console.log("El video no está en vivo");
+            }
+          } else {
+            console.error("No se encontró el video");
+          }
+        })
+        .catch((error) =>
+          console.error("Error fetching video details:", error)
+        );
+    }
+  });
+</script>

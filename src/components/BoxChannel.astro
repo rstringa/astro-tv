@@ -1,16 +1,24 @@
+---
+import youtubeChannels from "../data/channels.json";
+// Get only the first object
+const youtubeChannel = youtubeChannels[3];
 
+---
+    <div class="top-bar">
+        <h1>{youtubeChannel.name}</h1>
+    </div>
     <lite-youtube
       class="lite-youtube"
-      videoid="QGpHLgRnrx4"
+      videoid={youtubeChannel.id}
       params="controls=1&rel=0&enablejsapi=1&autoplay=1&mute=1"
-      style="background-image: url('https://i.ytimg.com/vi/QGpHLgRnrx4/hqdefault.jpg');"
+      style=`background-image: url('https://i.ytimg.com/vi/${youtubeChannel.id}/hqdefault.jpg');`
     >
       <a
-        href="https://youtube.com/watch?v=QGpHLgRnrx4"
+        href=`https://youtube.com/watch?v=${youtubeChannel.id}`
         class="lty-playbtn"
-        title="Ver Canal Online"
+        title={youtubeChannel.name}
       >
-        <span class="lyt-visually-hidden">Ver Canal Online</span>
+        <span class="lyt-visually-hidden">Ver Canal {youtubeChannel.name}</span>
       </a>
     </lite-youtube>
  
