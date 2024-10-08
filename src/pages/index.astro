@@ -35,13 +35,8 @@ import BoxChannel from "../components/BoxChannel.astro";
       const liteYoutube = document.querySelector(".lite-youtube");
       const menuChannelsList = document.querySelectorAll(".menu-channels a");
       const containerChannel = document.querySelector(".container-channel");
+      player();
 
-      //   liteYoutube.addEventListener("onReady", (event) => {
-
-      //   })
-
-        player();
-      //checkVideoOnline();
       menuChannelsList.forEach((link) =>
         link.addEventListener("click", (event) => {
           const youtubeId = link.getAttribute("data-youtube");
@@ -63,7 +58,6 @@ import BoxChannel from "../components/BoxChannel.astro";
             );
             link.parentElement.classList.add("is-active");
             loadVideo(youtubeId, titleText);
-			//checkVideoOnline(youtubeId, link.parentElement);
           });
         })
       );
@@ -81,20 +75,17 @@ import BoxChannel from "../components/BoxChannel.astro";
 				</a>
 			</lite-youtube>	
 			`;
-         player();
-      
+        player();
       }
 
-   
-
-        function player() {
-          const player = document.querySelector("lite-youtube");
-          setTimeout(() => {
-            player.getYTPlayer().then((p) => {
-              console.log(p);
-            });
-          }, 1000); // Agrega un retraso de 1 segundo
-        }
+      function player() {
+        const player = document.querySelector("lite-youtube");
+        setTimeout(() => {
+          player.getYTPlayer().then((p) => {
+            console.log(p);
+          });
+        }, 1000); // Agrega un retraso de 1 segundo
+      }
     </script>
   </body>
 </html>

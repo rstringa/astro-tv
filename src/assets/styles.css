@@ -139,9 +139,17 @@ main {
       h1 {
         display: none;
       }
+      ul {
+        display: flex;
+        flex-direction: column;
+        }
       li {
         margin-bottom: 0px;
         padding: 8px 8px 8px 10px;
+        order:1;
+        &:has(.is-live) {
+            order:0
+        }
         &.is-active {
           background-color: color-mix(
             in srgb,
